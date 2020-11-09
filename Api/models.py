@@ -5,8 +5,6 @@ from django.contrib.auth.models import (
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
-
-
 class UserManager(BaseUserManager):
 
     def create_user(self, username, email, password=None):
@@ -30,6 +28,15 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
+    def authenticate(self, username=None, password=None):
+        """ Authenticate a user based on email address as the user name. """
+        try:
+            user = User.objects.get(email=username)
+            if user.check_password(password):
+                return user
+        except User.DoesNotExist:
+            return None
+
 AUTH_PROVIDERS = {'facebook': 'facebook', 'google': 'google',
                   'twitter': 'twitter', 'email': 'email'}
 
@@ -48,8 +55,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     position=models.CharField(max_length=100,blank=True,null=True)
     working_status=models.CharField(max_length=100,blank=True,null=True)
     auth_provider = models.CharField(max_length=255,blank=False,null=False,default=AUTH_PROVIDERS.get('google'))
-    USERNAME_FIELD='username'
-    REQUIRED_FIELDS=['email']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     objects=UserManager()
 
@@ -77,7 +84,7 @@ class Customer(models.Model):
     team= models.CharField(max_length=100,blank=True,null=True)
     assignedto_id= models.CharField(max_length=100,blank=True,null=True)
     dateadded= models.DateField(auto_now=False,auto_now_add=False,blank=True,null=True)
-    first_comment_date= models.DateField(auto_now=False,auto_now_add=False)
+    first_comment_date= models.DateField(auto_now=False,auto_now_add=False,blank=True,null=True)
     age = models.IntegerField(blank=True,null=True)
     due_date_time=models.DateTimeField(auto_now=False,auto_now_add=False,blank=True,null=True)
     label=models.CharField(max_length=50,blank=True,null=True)
@@ -92,6 +99,19 @@ class Comment(models.Model):
     comment_detail=models.CharField(max_length=1000,blank=True,null=True)
 
 
+class Data(models.Model):
+    employee_id= models.CharField(max_length=100,blank=True,null=True)
+    date=models.DateField(auto_now=False,auto_now_add=False,blank=True,null=True)
+    Talk_Time = models.CharField(max_length=100,blank=True,null=True)
+    Total_Dial = models.CharField(max_length=100,blank=True,null=True)
+    Unique_Dial=models.CharField(max_length=100,blank=True,null=True)
+    Connected_Call=models.CharField(max_length=100,blank=True,null=True)
+    First_Call=models.CharField(max_length=100,blank=True,null=True)
+    Last_Call=models.CharField(max_length=100,blank=True,null=True)
+    status=models.CharField(max_length=100,blank=True,null=True)
+    Leads_Assigned=models.CharField(max_length=100,blank=True,null=True)
+    Leads_Declined=models.CharField(max_length=100,blank=True,null=True)
+    
 
 
 

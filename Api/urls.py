@@ -14,6 +14,6 @@ urlpatterns = [
     path('create_customer/<slug:slug>/', views.api_create_customer_view,name="Customer_create"),
     path('login/', views.GoogleSocialAuthView.as_view(),name="login"),
     path('user_detail/<slug:slug>/',views.api_detail_employee_view,name='user'),
-    path('user_update/<slug:slug>/',views.api_update_employee_comment_view,name='update')
-
+    path('user_update/<slug:slug>/',views.api_update_employee_view,name='update'),
+    path('data_detail/<slug:slug>/',views.api_detail_data_view,name='update')
 ]

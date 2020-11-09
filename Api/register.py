@@ -15,7 +15,7 @@ def generate_username(name):
         return generate_username(random_username)
 
 
-def register_social_user(provider, user_id, email, name):
+def register_social_user(provider,email, name):
     filtered_user_by_email = User.objects.filter(email=email)
 
     if filtered_user_by_email.exists():
