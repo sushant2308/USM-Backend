@@ -17,12 +17,6 @@ def api_list_allcustomer_view(request):
     serializer=CustomerSerializer(customer,many=True)
     return Response(serializer.data)
 
-@api_view(['GET', ])
-def api_list_allcustomer_view(request):
-    customer=Customer.objects.all()
-    serializer=CustomerSerializer(customer,many=True)
-    return Response(serializer.data)
-
     
 @api_view(['GET', ])
 def api_list_customer_view(request,slug):

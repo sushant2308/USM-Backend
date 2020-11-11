@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     
     path('all/', views.OrderedList.as_view(),name="AllCustomer"),
+    path('all/<slug:slug>/',views.api_list_customer_view,name="api_list_customer_view"),
     path('all/filter/team/<slug:slug>/', views.api_customer_filter_team_view,name="AllCustomer"),
     path('all/filter/label/<slug:slug>/', views.api_customer_filter_label_view,name="AllCustomer"),
     path('all/filter/firsttag/<slug:slug>/', views.api_customer_filter_firsttag_view,name="AllCustomer"),
