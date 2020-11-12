@@ -19,7 +19,7 @@ class CustomerSerializer(serializers.ModelSerializer):
     id=serializers.CharField(max_length=255,read_only=True)
     class Meta:
         model=Customer
-        fields=('id','firstphone','secondphone','thirdphone','email','location','details','firsttag','secondtag','team','dateadded','first_comment_date','age','due_date_time','label')
+        fields=('id','firstphone','secondphone','thirdphone','email','location','details','firsttag','secondtag','team','dateadded','first_comment_date','age','due_date_time','label','name',)
 
 
 class DataSerializer(serializers.ModelSerializer):
